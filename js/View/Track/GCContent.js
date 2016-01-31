@@ -26,6 +26,7 @@ return declare( WiggleDensity,
         var args = this.inherited(arguments);
         args.min_score = 0;
         args.max_score = 1;
+        args.scoreType = 'avgScore';
         return args;
     }
 });
