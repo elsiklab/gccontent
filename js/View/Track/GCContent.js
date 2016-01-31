@@ -16,11 +16,19 @@ define( [
 return declare( WiggleDensity,
 {
     constructor: function() {
-        var thisB = this;
-        this.store = new GCContent({
-            store: this.store,
-            browser: this.browser
-        });
+        if(this.config.windowSize) {
+            this.store = new GCContentWindow({
+                store: this.store,
+                browser: this.browser,
+                windowSize: this.config.windowSize
+            });
+        }
+        else {
+            this.store = new GCContent({
+                store: this.store,
+                browser: this.browser
+            });
+        }
     },
     _defaultConfig: function() {
         var args = this.inherited(arguments);
