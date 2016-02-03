@@ -23,7 +23,7 @@ adjust the sliding window size
 
 General options:
 
-* storeClass: IndexedFasta or SequenceChunks (i.e. output of prepare-refseqs.pl)  both work
+* storeClass: tested with JBrowse/Store/SeqFeature/IndexedFasta and JBrowse/Store/SeqFeature/SequenceChunks (i.e. output of prepare-refseqs.pl)
 * windowSize: Size of sliding window (default 100)
 * windowDelta: Step size of the sliding window (default 10)
 * type: GCContent/View/Track/GCContentXY (XYPlot) or GCContent/View/Track/GCContent (density)
