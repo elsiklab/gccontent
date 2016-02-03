@@ -22,7 +22,8 @@ return declare( WiggleDensity,
         this.store = new GCContentWindow({
             store: this.store,
             browser: this.browser,
-            windowSize: this.config.windowSize || 100
+            windowSize: this.config.windowSize || 100,
+            windowDelta: this.config.windowDelta || 10
         });
     },
     _defaultConfig: function() {

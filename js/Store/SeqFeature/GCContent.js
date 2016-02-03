@@ -20,6 +20,7 @@ return declare( SeqFeatureStore, {
     constructor: function( args ) {
         this.store = args.store;
         this.windowSize = args.windowSize;
+        this.windowDelta = args.windowDelta;
     },
 
     getGlobalStats: function( callback, errorCallback ) {
@@ -29,13 +30,6 @@ return declare( SeqFeatureStore, {
     getFeatures: function( query, featureCallback, finishCallback, errorCallback ) {
         query.start = Math.max( 0, query.start - this.windowSize/2 );
         query.end = Math.min( query.end + this.windowSize/2, this.browser.refSeq.length );
-        var leftBase = query.start;
-        var rightBase = query.end;
-        var scale = query.scale || ( ('basesPerSpan' in query) ? 1/query.basesPerSpan : 10 ); // px/bp
-        var widthBp = rightBase-leftBase;
-        var widthPx = widthBp * scale;
-        var binWidth = Math.ceil( 1/scale ); // in bp
-        var coverageBins = Math.ceil( widthBp/binWidth );
         var thisB = this;
         var map = {};
         
@@ -54,7 +48,7 @@ return declare( SeqFeatureStore, {
                     return;
                 }
     
-                for( var i = thisB.windowSize/2; i < residues.length - thisB.windowSize/2; i+=10 ) {
+                for( var i = thisB.windowSize/2; i < residues.length - thisB.windowSize/2; i+=thisB.windowDelta ) {
                     var r = residues.slice( i - thisB.windowSize/2, i + thisB.windowSize/2 );
                     var n = 0;
                     for( var j = 0; j < r.length; j++ ) {
@@ -62,7 +56,7 @@ return declare( SeqFeatureStore, {
                     }
                     featureCallback( new CoverageFeature({
                         start: start+i,
-                        end:   start+i+10,
+                        end:   start+i+thisB.windowDelta,
                         score: n/r.length
                     }));
                 }
