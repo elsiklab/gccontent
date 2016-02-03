@@ -2,7 +2,6 @@ define( [
             'dojo/_base/declare',
             'dojo/_base/array',
             'dojo/_base/lang',
-            'GCContent/Store/SeqFeature/GCContentWindow',
             'GCContent/Store/SeqFeature/GCContent',
             'GCContent/View/Dialog/WindowSizeDialog',
             'JBrowse/View/Track/Wiggle/XYPlot'
@@ -11,7 +10,6 @@ define( [
             declare,
             array,
             lang,
-            GCContentWindow,
             GCContent,
             WindowSize,
             WiggleXY
@@ -20,19 +18,11 @@ define( [
 return declare( WiggleXY,
 {
     constructor: function() {
-        if(this.config.windowSize) {
-            this.store = new GCContentWindow({
-                store: this.store,
-                browser: this.browser,
-                windowSize: this.config.windowSize
-            });
-        }
-        else {
-            this.store = new GCContent({
-                store: this.store,
-                browser: this.browser
-            });
-        }
+        this.store = new GCContentWindow({
+            store: this.store,
+            browser: this.browser,
+            windowSize: this.config.windowSize || 100
+        });
     },
     _defaultConfig: function() {
         var args = this.inherited(arguments);
@@ -53,7 +43,7 @@ return declare( WiggleXY,
                         track.config.windowSize = filterInt;
                         track.browser.publish('/jbrowse/v1/c/tracks/replace', [track.config]);
                     },
-                    windowSize: track.config.windowSize||100
+                    windowSize: track.config.windowSize || 100
                 }).show();
             }
         });
