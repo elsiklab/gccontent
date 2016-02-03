@@ -32,17 +32,25 @@ return declare( SeqFeatureStore, {
         query.end = Math.min( query.end + this.windowSize/2, this.browser.refSeq.length );
         var thisB = this;
         var map = {};
+
+        if( query.end < 0 ) {
+            finishCallback();
+            return;
+        }
         
         this.store.getFeatures(
             query,
             function( feature ) {
-                map[feature.get('start')] = feature.get('residues');
+                //cast to int
+                map[parseInt(feature.get('start'),10)] = feature.get('residues');
             },
             function() {
                 var residues;
-                var pos = dojof.keys(map).sort();
+                var pos = dojof.keys(map).sort(function (a, b) { 
+                    return a - b;
+                });
                 var start = +pos[0];
-                array.forEach( pos, function(index) { residues += map[index]; delete map[index]; } );
+                array.forEach( pos, function(index) { residues += map[index]; } );
                 if( !residues ) {
                     finishCallback();
                     return;
