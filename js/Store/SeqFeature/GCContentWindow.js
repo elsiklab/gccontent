@@ -27,8 +27,10 @@ return declare( SeqFeatureStore, {
     },
 
     getFeatures: function( query, featureCallback, finishCallback, errorCallback ) {
-        var leftBase  = query.start-this.windowSize;
-        var rightBase = query.end+this.windowSize;
+        query.start = Math.max( 0, query.start - this.windowSize/2 );
+        query.end = Math.min( query.end + this.windowSize/2, this.browser.refSeq.length );
+        var leftBase = query.start;
+        var rightBase = query.end;
         var scale = query.scale || ( ('basesPerSpan' in query) ? 1/query.basesPerSpan : 10 ); // px/bp
         var widthBp = rightBase-leftBase;
         var widthPx = widthBp * scale;
@@ -46,14 +48,14 @@ return declare( SeqFeatureStore, {
                 var residues;
                 var pos = dojof.keys(map).sort();
                 var start = +pos[0];
-                array.forEach( pos, function(index) { residues += map[index]; } );
-                if(!residues) {
+                array.forEach( pos, function(index) { residues += map[index]; delete map[index]; } );
+                if( !residues ) {
                     finishCallback();
                     return;
                 }
     
-                for( var i = 0; i < residues.length; i+=10 ) {
-                    var r = residues.slice( i, i + thisB.windowSize );
+                for( var i = thisB.windowSize/2; i < residues.length - thisB.windowSize/2; i+=10 ) {
+                    var r = residues.slice( i - thisB.windowSize/2, i + thisB.windowSize/2 );
                     var n = 0;
                     for( var j = 0; j < r.length; j++ ) {
                         if(r[j]=="c"||r[j]=="g"||r[j]=="G"||r[j]=="C") n++;
