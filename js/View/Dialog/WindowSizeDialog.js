@@ -30,6 +30,7 @@ return declare( ActionBarDialog, {
 
     constructor: function( args ) {
         this.windowSize      = args.windowSize || 100;
+        this.windowDelta     = args.windowDelta|| 10;
         this.browser         = args.browser;
         this.setCallback     = args.setCallback || function() {};
         this.cancelCallback  = args.cancelCallback || function() {};
@@ -39,9 +40,10 @@ return declare( ActionBarDialog, {
         var ok_button = new Button({
             label: "OK",
             onClick: dojo.hitch(this, function() {
-                var height = parseInt(this.windowSizeSpinner.getValue());
-                if (isNaN(height)) return;
-                this.setCallback && this.setCallback( height );
+                var windowSize = parseInt(this.windowSizeSpinner.getValue());
+                var windowDelta = parseInt(this.windowDeltaSpinner.getValue());
+                if (isNaN(windowSize)||isNaN(windowDelta)) return;
+                this.setCallback && this.setCallback( windowSize, windowDelta );
                 this.hide();
             })
         }).placeAt(actionBar);
@@ -63,10 +65,19 @@ return declare( ActionBarDialog, {
             smallDelta: 10
         });
 
+        this.windowDeltaSpinner = new NumberSpinner({
+            value: this.windowDelta,
+            smallDelta: 10
+        });
+
         this.set('content', [
-                     dom.create('label', { "for": 'window_size', innerHTML: '' } ),
+                     dom.create( 'p', { innerHTML: 'Set parameters for the GC-content calculation using sliding window size and delta' } ),
+                     dom.create('label', { "for": 'window_size', innerHTML: 'Window size (bp)',style:{display: "inline-block", width: "100px"} } ),
                      this.windowSizeSpinner.domNode,
-                     dom.create( 'span', { innerHTML: ' sliding window size' } )
+                     dom.create('br'),
+                     dom.create('label', { "for": 'window_delta', innerHTML: 'Window delta (bp)',style: {display: "inline-block",width: "100px" } } ),
+                     this.windowDeltaSpinner.domNode,
+                     dom.create('br')
                  ] );
 
         this.inherited( arguments );

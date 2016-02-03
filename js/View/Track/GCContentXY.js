@@ -4,7 +4,8 @@ define( [
             'dojo/_base/lang',
             'GCContent/Store/SeqFeature/GCContent',
             'GCContent/View/Dialog/WindowSizeDialog',
-            'JBrowse/View/Track/Wiggle/XYPlot'
+            'JBrowse/View/Track/Wiggle/XYPlot',
+            'JBrowse/Util'
         ],
         function(
             declare,
@@ -12,26 +13,33 @@ define( [
             lang,
             GCContent,
             WindowSize,
-            WiggleXY
+            WiggleXY,
+            Util
         ) {
 
 return declare( WiggleXY,
 {
     constructor: function() {
-        this.store = new GCContentWindow({
+        this.store = new GCContent({
             store: this.store,
             browser: this.browser,
-            windowSize: this.config.windowSize || 100,
-            windowSize: this.config.windowDelta || 10
+            windowSize: this.config.windowSize,
+            windowDelta: this.config.windowDelta
         });
     },
     _defaultConfig: function() {
         var args = this.inherited(arguments);
-        args.min_score = 0;
-        args.max_score = 1;
-        args.scoreType = 'avgScore';
-        args.logScaleOption = false;
-        return args;
+        return Util.deepUpdate(
+            lang.clone( this.inherited(arguments) ),
+            {   
+                min_score: 0,
+                max_score: 1,
+                windowSize: 100,
+                windowDelta: 10,
+                bicolor_pivot: 0.5,
+                scoreType: 'avgScore',
+                logScaleOption: false
+            });
     },
     _trackMenuOptions: function() {
         var track = this;
@@ -40,15 +48,18 @@ return declare( WiggleXY,
             label: 'Window size',
             onClick: function(event) {
                 new WindowSize({
-                    setCallback: function( filterInt ) {
-                        track.config.windowSize = filterInt;
+                    setCallback: function( ws, wd ) {
+                        track.config.windowSize = ws;
+                        track.config.windowDelta = wd;
                         track.browser.publish('/jbrowse/v1/c/tracks/replace', [track.config]);
                     },
-                    windowSize: track.config.windowSize || 100
+                    windowSize: track.config.windowSize,
+                    windowDelta: track.config.windowDelta
                 }).show();
             }
         });
         return options;
     }
+    
 });
 });
