@@ -11,8 +11,6 @@ adjust the sliding window size
 
 ## Example configuration
 
-Use a indexed FASTA source file
-
     {
       "storeClass" : "JBrowse/Store/SeqFeature/IndexedFasta",
       "type": "GCContent/View/Track/GCContentXY",
@@ -21,16 +19,19 @@ Use a indexed FASTA source file
       "bicolor_pivot": 0.5
     }
 
-or, use SequenceChunks from a prepare-refseqs.pl run
+## Options
 
-      {
-          "storeClass" : "JBrowse/Store/SeqFeature/SequenceChunks",
-          "type": "GCContent/View/Track/GCContentXY",
-          "label": "GCContentWindow StaticChunked",
-          "urlTemplate" : "seq/{refseq_dirpath}/{refseq}-",
-          "bicolor_pivot": 0.5,
-          "windowSize": 500,
-          "windowDelta": 100
-      }
+General options:
 
-The windowSize and windowDelta parameters can be used to customized the granularity
+* storeClass: IndexedFasta or SequenceChunks (i.e. output of prepare-refseqs.pl)  both work
+* windowSize: Size of sliding window (default 100)
+* windowDelta: Step size of the sliding window (default 10)
+* type: GCContent/View/Track/GCContentXY (XYPlot) or GCContent/View/Track/GCContent (density)
+
+Other default params
+
+* bicolor_pivot: 0.5
+* max_score: 1
+* min_score: 0
+
+See http://gmod.org/wiki/JBrowse_Configuration_Guide#Wiggle.2FBigWig_Tracks_.28XYPlot.2C_Density.29 for more options
