@@ -33,7 +33,7 @@ return declare( SeqFeatureStore, {
         var thisB = this;
         var map = {};
 
-        if( query.end < 0 ) {
+        if( query.end < 0 || query.start > query.end ) {
             finishCallback();
             return;
         }
@@ -41,16 +41,14 @@ return declare( SeqFeatureStore, {
         this.store.getFeatures(
             query,
             function( feature ) {
-                //cast to int
-                map[parseInt(feature.get('start'),10)] = feature.get('residues');
+                map[feature.get('start')] = feature.get('residues');
             },
             function() {
-                var residues;
+                //numeric sort array, default is alphanum
                 var pos = dojof.keys(map).sort(function (a, b) { 
                     return a - b;
                 });
-                var start = +pos[0];
-                array.forEach( pos, function(index) { residues += map[index]; } );
+                var residues = array.map(pos, function(index) { return map[index]; }).join('');
                 if( !residues ) {
                     finishCallback();
                     return;
@@ -63,8 +61,8 @@ return declare( SeqFeatureStore, {
                         if(r[j]=="c"||r[j]=="g"||r[j]=="G"||r[j]=="C") n++;
                     }
                     featureCallback( new CoverageFeature({
-                        start: start+i,
-                        end:   start+i+thisB.windowDelta,
+                        start: +pos[0]+i,
+                        end:   +pos[0]+i+thisB.windowDelta,
                         score: n/r.length
                     }));
                 }
