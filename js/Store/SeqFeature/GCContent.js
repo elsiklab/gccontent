@@ -1,9 +1,9 @@
 define([
-           'dojo/_base/declare',
-           'dojo/_base/array',
-           'JBrowse/Store/SeqFeature',
-           'JBrowse/Util',
-           'JBrowse/Model/CoverageFeature'
+            'dojo/_base/declare',
+            'dojo/_base/array',
+            'JBrowse/Store/SeqFeature',
+            'JBrowse/Util',
+            'JBrowse/Model/CoverageFeature'
        ],
        function(
             declare,
@@ -31,43 +31,32 @@ return declare( SeqFeatureStore, {
         query.start = Math.max( 0, query.start - this.windowSize/2 );
         query.end = Math.min( query.end + this.windowSize/2, this.browser.refSeq.length );
         var thisB = this;
-        var map = {};
 
         if( query.end < 0 || query.start > query.end ) {
             finishCallback();
             return;
         }
         
-        this.store.getFeatures(
+        this.store.getReferenceSequence(
             query,
-            function( feature ) {
-                map[feature.get('start')] = feature.get('residues');
-            },
-            function() {
-                //numeric sort array, default is alphanum
-                var pos = dojof.keys(map).sort(function (a, b) { 
-                    return a - b;
-                });
-                var residues = array.map(pos, function(index) { return map[index]; }).join('');
-                if( !residues ) {
-                    finishCallback();
-                    return;
-                }
-    
+            function( residues ) {
                 for( var i = thisB.windowSize/2; i < residues.length - thisB.windowSize/2; i+=thisB.windowDelta ) {
                     var r = residues.slice( i - thisB.windowSize/2, i + thisB.windowSize/2 );
                     var n = 0;
                     for( var j = 0; j < r.length; j++ ) {
                         if(r[j]=="c"||r[j]=="g"||r[j]=="G"||r[j]=="C") n++;
                     }
-                    featureCallback( new CoverageFeature({
-                        start: +pos[0]+i,
-                        end:   +pos[0]+i+thisB.windowDelta,
+                    var pos = query.start;
+                    var feat = new CoverageFeature({
+                        start: pos+i,
+                        end:   pos+i+thisB.windowDelta,
                         score: n/r.length
-                    }));
+                    });
+                    featureCallback(feat);
                 }
                 finishCallback();
             },
+            finishCallback,
             errorCallback
         );
     }
