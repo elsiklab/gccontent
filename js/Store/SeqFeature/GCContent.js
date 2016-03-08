@@ -52,7 +52,7 @@ return declare( SeqFeatureStore, {
                         else if(r[j]=="g"||r[j]=="G") ng++;
                     }
                     var pos = query.start;
-                    var score = 0.5;
+                    var score;
                     if(thisB.gcMode === 'content') {
                         score = (ng + nc)/r.length
                     }else if(thisB.gcMode === 'skew') {
