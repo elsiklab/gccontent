@@ -29,7 +29,6 @@ return declare( WiggleXY,
         });
     },
     _defaultConfig: function() {
-        var args = this.inherited(arguments);
         return Util.deepUpdate(
             lang.clone( this.inherited(arguments) ),
             {
