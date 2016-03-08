@@ -54,6 +54,13 @@ return declare( WiggleXY,
                         track.config.windowSize = ws;
                         track.config.windowDelta = wd;
                         track.config.gcMode = mode;
+                        if(mode === 'skew'){
+                            track.config.min_score = -1;
+                            track.config.bicolor_pivot = 0;
+                        }else{
+                            track.config.min_score = 0;
+                            track.config.bicolor_pivot = 0.5;
+                        }
                         track.browser.publish('/jbrowse/v1/c/tracks/replace', [track.config]);
                     },
                     windowSize: track.config.windowSize,
