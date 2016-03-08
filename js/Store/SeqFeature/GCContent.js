@@ -42,7 +42,6 @@ return declare( SeqFeatureStore, {
         this.store.getReferenceSequence(
             query,
             function( residues ) {
-                console.log(thisB.gcMode)
                 for( var i = thisB.halfWindow; i < residues.length - thisB.halfWindow; i+=thisB.windowDelta ) {
                     var r = residues.slice( i - thisB.halfWindow, i + thisB.halfWindow );
                     var nc = 0;
