@@ -47,7 +47,7 @@ return declare( WiggleXY,
         var track = this;
         var options = this.inherited(arguments);
         options.push({
-            label: 'Window size',
+            label: 'GC Track Options',
             onClick: function(event) {
                 new WindowSize({
                     setCallback: function( ws, wd, mode ) {
