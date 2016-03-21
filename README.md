@@ -6,13 +6,15 @@ type that derives from the Wiggle XY or density types, and a dialog box to
 adjust the sliding window size, window step size, and the calculation mode (content or skew)
 
 
-Image showing GC content
 
 ![](img/gccontent.png)
 
-Image showing GC skew
+Fig 1. GC content
+
 
 ![](img/gcskew.png)
+
+Fig 2. GC skew (note change in orientation of gene predictions)
 
 ## Example configuration
 
