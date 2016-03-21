@@ -6,7 +6,13 @@ type that derives from the Wiggle XY or density types, and a dialog box to
 adjust the sliding window size, window step size, and the calculation mode (content or skew)
 
 
-![](img/out.png)
+Image showing GC content
+
+![](img/gccontent.png)
+
+Image showing GC skew
+
+![](img/gcskew.png)
 
 ## Example configuration
 
