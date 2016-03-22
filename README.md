@@ -48,8 +48,9 @@ General options:
 * storeClass: tested with JBrowse/Store/SeqFeature/IndexedFasta and JBrowse/Store/SeqFeature/SequenceChunks (i.e. output of prepare-refseqs.pl)
 * windowSize: Size of sliding window (default 100)
 * windowDelta: Step size of the sliding window (default 10)
-* gcMode: The calculation mode, either skew or content (default content)
+* gcMode: The calculation mode, either "skew" for calculation gc skew or "content" for gc content (default: content)
 * type: GCContent/View/Track/GCContentXY (XYPlot) or GCContent/View/Track/GCContent (density)
+* maxZoom: The maximum level for which to calculate the GC content for. Measured in pixels per basepair. Default: 0.0001. Make smaller fraction to allow zooming out more
 
 Other default params
 
