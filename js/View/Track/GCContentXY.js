@@ -34,6 +34,7 @@ return declare( WiggleXY,
             {
                 min_score: 0,
                 max_score: 1,
+                maxZoom: 0.001,
                 windowSize: 100,
                 windowDelta: 10,
                 gcMode: 'content',
@@ -69,6 +70,31 @@ return declare( WiggleXY,
             }
         });
         return options;
+    },
+
+
+    fillBlock: function( args ) {
+        var block = args.block;
+        var blockIndex = args.blockIndex;
+        var scale = args.scale;
+        var blur = dojo.create(
+            'div',
+            { className: 'sequence_blur',
+              innerHTML: '<span class="loading">Loading</span>'
+            }, block.domNode );
+
+        this.heightUpdate( blur.offsetHeight+2*blur.offsetTop, blockIndex );
+
+        // if we are zoomed in far enough to draw bases, then draw them
+        if ( scale >= this.config.maxZoom ) {
+            this.inherited(arguments);
+        }
+        // otherwise, just draw a sort of line (possibly dotted) that
+        // suggests there are bases there if you zoom in far enough
+        else {
+            blur.innerHTML = '<span class="zoom">Zoom in to see GC content</span>';
+            args.finishCallback();
+        }
     }
 });
 });
