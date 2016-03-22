@@ -18,13 +18,19 @@ Fig 2. GC skew (note change in orientation of gene predictions)
 
 ## Example configuration
 
+Using default SequenceChunks store
+
     {
-      "storeClass" : "JBrowse/Store/SeqFeature/IndexedFasta",
+      "storeClass" : "JBrowse/Store/SeqFeature/SequenceChunks",
       "type": "GCContent/View/Track/GCContentXY",
-      "label": "GC Content",
-      "urlTemplate" : "Amel_4.5_scaffolds.fa",
+      "label": "GCContentXY",
+      "urlTemplate" : "seq/{refseq_dirpath}/{refseq}-",
       "bicolor_pivot": 0.5
-    },
+    }
+
+
+Using GC skew (and indexed FASTA)
+
     {
       "storeClass" : "JBrowse/Store/SeqFeature/IndexedFasta",
       "type": "GCContent/View/Track/GCContentXY",
