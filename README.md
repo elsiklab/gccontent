@@ -41,6 +41,20 @@ Using GC skew (and indexed FASTA)
       "bicolor_pivot": 0
     }
 
+
+Note: if you use SequenceChunks for the store class, then make the regular sequence track have "label": "refseqs"
+
+    {
+       "key" : "Reference sequence",
+       "storeClass" : "JBrowse/Store/Sequence/StaticChunked",
+       "chunkSize" : 20000,
+       "urlTemplate" : "seq/{refseq_dirpath}/{refseq}-",
+       "label" : "refseqs",
+       "type" : "SequenceTrack"
+    }
+
+Otherwise it tries to use GCContent as the store in the popup box
+
 ## Options
 
 General options:
