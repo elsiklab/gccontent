@@ -73,3 +73,13 @@ Other default params
 * min_score: 0
 
 See http://gmod.org/wiki/JBrowse_Configuration_Guide#Wiggle.2FBigWig_Tracks_.28XYPlot.2C_Density.29 for more options
+
+
+## Intallation
+
+In the jbrowse plugin folder
+
+
+    git clone https://github.com/cmdcolin/GCContent
+
+This will create the GCContent folder. It should be upper cased like this. Then add the plugin to your config file
