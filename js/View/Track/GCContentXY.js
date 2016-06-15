@@ -54,10 +54,10 @@ return declare( WiggleXY,
                         track.config.windowSize = ws;
                         track.config.windowDelta = wd;
                         track.config.gcMode = mode;
-                        if(mode === 'skew'){
+                        if(mode === 'skew') {
                             track.config.min_score = -1;
                             track.config.bicolor_pivot = 0;
-                        }else{
+                        }else {
                             track.config.min_score = 0;
                             track.config.bicolor_pivot = 0.5;
                         }
@@ -83,13 +83,13 @@ return declare( WiggleXY,
               innerHTML: '<span class="loading">Loading</span>'
             }, block.domNode );
 
-        this.heightUpdate( blur.offsetHeight+2*blur.offsetTop, blockIndex );
+        this.heightUpdate( blur.offsetHeight + 2 * blur.offsetTop, blockIndex );
 
-        // if we are zoomed in far enough to draw bases, then draw them
+        // If we are zoomed in far enough to draw bases, then draw them
         if ( scale >= this.config.maxZoom ) {
             this.inherited(arguments);
         }
-        // otherwise, just draw a sort of line (possibly dotted) that
+        // Otherwise, just draw a sort of line (possibly dotted) that
         // suggests there are bases there if you zoom in far enough
         else {
             blur.innerHTML = '<span class="zoom">Zoom in to see GC content</span>';

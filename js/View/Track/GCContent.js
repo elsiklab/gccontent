@@ -53,10 +53,10 @@ return declare( WiggleDensity,
                         track.config.windowSize = ws;
                         track.config.windowDelta = wd;
                         track.config.gcMode = mode;
-                        if(mode === 'skew'){
+                        if(mode === 'skew') {
                             track.config.min_score = -1;
                             track.config.bicolor_pivot = 0;
-                        }else{
+                        }else {
                             track.config.min_score = 0;
                             track.config.bicolor_pivot = 0.5;
                         }

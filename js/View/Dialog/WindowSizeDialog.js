@@ -2,7 +2,6 @@ define([
            'dojo/_base/declare',
            'dojo/dom-construct',
            'dojo/on',
-           //'dojo/parser',
            'dijit/focus',
            'dijit/form/NumberSpinner',
            'dijit/form/Select',
@@ -24,16 +23,11 @@ define([
 
 
 return declare( ActionBarDialog, {
-    /**
-     * Dijit Dialog subclass that pops up prompt for the user to
-     * manually set a new highlight.
-     * @lends JBrowse.View.InfoDialog
-     */
     title: 'Set GC Track options',
 
     constructor: function( args ) {
         this.windowSize      = args.windowSize || 100;
-        this.windowDelta     = args.windowDelta|| 10;
+        this.windowDelta     = args.windowDelta || 10;
         this.gcMode          = args.gcMode || 'content';
         this.browser         = args.browser;
         this.setCallback     = args.setCallback || function() {};
@@ -42,19 +36,21 @@ return declare( ActionBarDialog, {
 
     _fillActionBar: function( actionBar ) {
         var ok_button = new Button({
-            label: "OK",
+            label: 'OK',
             onClick: dojo.hitch(this, function() {
                 var windowSize = parseInt(this.windowSizeSpinner.getValue());
                 var windowDelta = parseInt(this.windowDeltaSpinner.getValue());
                 var gcMode = this.gcModeSelect.getValue();
-                if (isNaN(windowSize)||isNaN(windowDelta)) return;
+                if (isNaN(windowSize) || isNaN(windowDelta)) {
+                    return;
+                }
                 this.setCallback && this.setCallback( windowSize, windowDelta, gcMode );
                 this.hide();
             })
         }).placeAt(actionBar);
 
         var cancel_button = new Button({
-            label: "Cancel",
+            label: 'Cancel',
             onClick: dojo.hitch(this, function() {
                 this.cancelCallback && this.cancelCallback();
                 this.hide();
@@ -86,13 +82,13 @@ return declare( ActionBarDialog, {
 
         this.set('content', [
                      dom.create( 'p', { innerHTML: 'Set parameters for the GC-content calculation using sliding window size and delta' } ),
-                     dom.create('label', { "for": 'window_size', innerHTML: 'Window size (bp)',style:{display: "inline-block", width: "100px"} } ),
+                     dom.create('label', { for: 'window_size', innerHTML: 'Window size (bp)',style: {display: 'inline-block', width: '100px'} } ),
                      this.windowSizeSpinner.domNode,
                      dom.create('br'),
-                     dom.create('label', { "for": 'window_delta', innerHTML: 'Window delta (bp)',style: {display: "inline-block",width: "100px" } } ),
+                     dom.create('label', { for: 'window_delta', innerHTML: 'Window delta (bp)',style: {display: 'inline-block',width: '100px' } } ),
                      this.windowDeltaSpinner.domNode,
                      dom.create('br'),
-                     dom.create('label', { "for": 'gc_mode_select', innerHTML: 'GC Calculation Mode', style: {display: "inline-block",width: "100px" } } ),
+                     dom.create('label', { for: 'gc_mode_select', innerHTML: 'GC Calculation Mode', style: {display: 'inline-block',width: '100px' } } ),
                      this.gcModeSelect.domNode,
                      dom.create('br')
                  ] );

@@ -17,19 +17,19 @@ var dojof = Util.dojof;
 
 return declare( SeqFeatureStore, {
 
-    constructor: function( args ) {
+   constructor: function( args ) {
         this.store = args.store;
         this.windowSize = args.windowSize;
         this.windowDelta = args.windowDelta;
-        this.gcMode = args.gcMode; // content, skew
+        this.gcMode = args.gcMode; // Content, skew
     },
 
-    getGlobalStats: function( callback, errorCallback ) {
+   getGlobalStats: function( callback, errorCallback ) {
         callback( {} );
     },
 
-    getFeatures: function( query, featureCallback, finishCallback, errorCallback ) {
-        var hw = this.windowSize/2; // half the window size
+   getFeatures: function( query, featureCallback, finishCallback, errorCallback ) {
+        var hw = this.windowSize / 2; // Half the window size
         query.start = Math.max( 0, query.start - hw );
         query.end = Math.min( query.end + hw, this.browser.refSeq.length );
         var thisB = this;
@@ -47,8 +47,12 @@ return declare( SeqFeatureStore, {
                     var nc = 0;
                     var ng = 0;
                     for( var j = 0; j < r.length; j++ ) {
-                        if(r[j] == "c" || r[j] == "C") nc++;
-                        else if(r[j] == "g" || r[j] == "G") ng++;
+                        if(r[j] == 'c' || r[j] == 'C') {
+                            nc++;
+                        }
+                        else if(r[j] == 'g' || r[j] == 'G') {
+                            ng++;
+                        }
                     }
                     var pos = query.start;
                     var score;
@@ -60,8 +64,8 @@ return declare( SeqFeatureStore, {
                     }
 
                     var feat = new CoverageFeature({
-                        start: pos+i,
-                        end:   pos+i+thisB.windowDelta,
+                        start: pos + i,
+                        end:   pos + i + thisB.windowDelta,
                         score: score
                     });
                     featureCallback(feat);
