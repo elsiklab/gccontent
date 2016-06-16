@@ -6,6 +6,7 @@ function copyOnly(mid) {
     };
 }
 
+/* exported profile */
 var profile = {
     action: 'release',
     cssOptimize: 'comments',
@@ -56,7 +57,7 @@ var profile = {
 
         // Files that should not be copied when the “mini” compiler flag is set to true.
         miniExclude: function(filename, mid) {
-            return !( /^GCContent/.test(mid) );
+            return !(/^GCContent/.test(mid));
         }
     }
 };
