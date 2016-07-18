@@ -1,5 +1,7 @@
 # gccontent
 
+[![](https://travis-ci.org/cmdcolin/gccontent.svg?branch=master)](https://travis-ci.org/cmdcolin/gccontent)
+
 A JBrowse plugin for plotting GC Content and GC Skew. The plugin consists of a storeClass that
 automatically calculates the percentage of G/C bases in a region, a track
 type that derives from the Wiggle XY or density types, and a dialog box to
