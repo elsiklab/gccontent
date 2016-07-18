@@ -77,9 +77,10 @@ See http://gmod.org/wiki/JBrowse_Configuration_Guide#Wiggle.2FBigWig_Tracks_.28X
 
 ## Intallation
 
-In the jbrowse plugin folder
+Clone the repository to the jbrowse plugins subdirectory and name it GCContent
 
+    git clone https://github.com/cmdcolin/gccontent GCContent
 
-    git clone https://github.com/cmdcolin/GCContent
+Then add the plugin to your configuration, e.g. "plugins": ["GCContent"]
 
-This will create the GCContent folder. It should be upper cased like this. Then add the plugin to your config file
+See http://gmod.org/wiki/JBrowse_FAQ#How_do_I_install_a_plugin for details
