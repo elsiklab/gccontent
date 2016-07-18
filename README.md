@@ -23,7 +23,7 @@ Using default SequenceChunks store
     {
       "storeClass" : "JBrowse/Store/SeqFeature/SequenceChunks",
       "type": "GCContent/View/Track/GCContentXY",
-      "label" : "refseqs",
+      "label" : "GCContentXY",
       "urlTemplate" : "seq/{refseq_dirpath}/{refseq}-",
       "bicolor_pivot": 0.5
     }
