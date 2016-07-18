@@ -23,7 +23,7 @@ Using default SequenceChunks store
     {
       "storeClass" : "JBrowse/Store/SeqFeature/SequenceChunks",
       "type": "GCContent/View/Track/GCContentXY",
-      "label": "GCContentXY",
+      "label" : "refseqs",
       "urlTemplate" : "seq/{refseq_dirpath}/{refseq}-",
       "bicolor_pivot": 0.5
     }
@@ -42,7 +42,7 @@ Using GC skew (and indexed FASTA)
     }
 
 
-Note: if you use SequenceChunks for the store class, then make the regular sequence track have "label": "refseqs"
+Note: if you use SequenceChunks for the store class, then make the regular sequence track (i.e. not the GCContent one) have "label": "refseqs"
 
     {
        "key" : "Reference sequence",
@@ -53,7 +53,7 @@ Note: if you use SequenceChunks for the store class, then make the regular seque
        "type" : "SequenceTrack"
     }
 
-Otherwise it tries to use GCContent as the store in the popup box
+Otherwise jbrowse tries to use the GCContent track as the store class for getting reference sequences
 
 ## Options
 
