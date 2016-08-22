@@ -1,6 +1,6 @@
 # gccontent
 
-[![](https://travis-ci.org/cmdcolin/gccontent.svg?branch=master)](https://travis-ci.org/cmdcolin/gccontent)
+[![](https://travis-ci.org/elsiklab/gccontent.svg?branch=master)](https://travis-ci.org/elsiklab/gccontent)
 
 A JBrowse plugin for plotting GC Content and GC Skew. The plugin consists of a storeClass that
 automatically calculates the percentage of G/C bases in a region, a track
