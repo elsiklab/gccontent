@@ -9,8 +9,20 @@
       "label": "DNA",
       "type": "SequenceTrack",
       "category": "Reference sequence"
+    },
+    {
+      "storeClass": "JBrowse/Store/Sequence/StaticChunked",
+      "urlTemplate": "seq/{refseq_dirpath}/{refseq}-",
+      "type": "GCContent/View/Track/GCContentXY",
+      "label": "GCContentXY"
+    },
+    {
+      "storeClass": "JBrowse/Store/Sequence/StaticChunked",
+      "urlTemplate": "seq/{refseq_dirpath}/{refseq}-",
+      "type": "GCContent/View/Track/GCContent",
+      "label": "GCContent"
     }
   ],
   "formatVersion": 1,
-  "plugins": ["MultiBigWig"]
+  "plugins": ["GCContent"]
 }
