@@ -55,13 +55,14 @@ function (
                     } else if (thisB.gcMode === 'skew') {
                         score = (ng - nc) / (ng + nc);
                     }
-
-                    var feat = new CoverageFeature({
-                        start: pos + i,
-                        end: pos + i + thisB.windowDelta,
-                        score: score
-                    });
-                    featureCallback(feat);
+                    if(r[Math.floor(r.length/2)] != 'N') {
+                        var feat = new CoverageFeature({
+                            start: pos + i,
+                            end: pos + i + thisB.windowDelta,
+                            score: score
+                        });
+                        featureCallback(feat);
+                    }
                 }
                 finishCallback();
             },

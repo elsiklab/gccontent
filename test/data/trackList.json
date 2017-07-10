@@ -21,6 +21,14 @@
       "urlTemplate": "seq/{refseq_dirpath}/{refseq}-",
       "type": "GCContent/View/Track/GCContent",
       "label": "GCContent"
+    },
+    {
+      "storeClass": "JBrowse/Store/Sequence/StaticChunked",
+      "urlTemplate": "seq/{refseq_dirpath}/{refseq}-",
+      "type": "GCContent/View/Track/GCContent",
+      "label": "GCContent 1bp",
+      "windowSize": 1,
+      "windowDelta": 1
     }
   ],
   "formatVersion": 1,
