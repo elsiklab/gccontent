@@ -5,7 +5,7 @@ define([
     'JBrowse/Util',
     'JBrowse/Model/CoverageFeature'
 ],
-function(
+function (
     declare,
     array,
     SeqFeatureStore,
@@ -13,20 +13,21 @@ function(
     CoverageFeature
 ) {
     return declare(SeqFeatureStore, {
-        constructor: function(args) {
+        constructor: function (args) {
             this.store = args.store;
             this.windowSize = args.windowSize;
             this.windowDelta = args.windowDelta;
             this.gcMode = args.gcMode; // Content, skew
         },
 
-        getGlobalStats: function(callback /* , errorCallback */) {
+        getGlobalStats: function (callback /* , errorCallback */) {
             callback({});
         },
 
-        getFeatures: function(query, featureCallback, finishCallback, errorCallback) {
-            var hw = this.windowSize / 2; // Half the window size
-            query.start = Math.max(0, query.start - hw);
+        getFeatures: function (query, featureCallback, finishCallback, errorCallback) {
+            var hw = this.windowSize === 1 ? 1 : this.windowSize / 2; // Half the window size
+            var f = this.windowSize === 1;
+            query.start = Math.max(0, query.start - hw) - 1;
             query.end = Math.min(query.end + hw, this.browser.refSeq.length);
             var thisB = this;
 
@@ -35,9 +36,9 @@ function(
                 return;
             }
 
-            this.store.getReferenceSequence(query, function(residues) {
+            this.store.getReferenceSequence(query, function (residues) {
                 for (var i = hw; i < residues.length - hw; i += thisB.windowDelta) {
-                    var r = residues.slice(i - hw, i + hw);
+                    var r = f ? residues[i] : residues.slice(i - hw, i + hw);
                     var nc = 0;
                     var ng = 0;
                     for (var j = 0; j < r.length; j++) {
