@@ -55,7 +55,7 @@ function (
                     } else if (thisB.gcMode === 'skew') {
                         score = (ng - nc) / (ng + nc);
                     }
-                    if(r[Math.floor(r.length/2)] != 'N') {
+                    if (r[Math.floor(r.length / 2)] != 'N') {
                         var feat = new CoverageFeature({
                             start: pos + i,
                             end: pos + i + thisB.windowDelta,

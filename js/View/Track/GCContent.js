@@ -7,7 +7,7 @@ define([
     'JBrowse/View/Track/Wiggle/Density',
     'JBrowse/Util'
 ],
-function(
+function (
     declare,
     array,
     lang,
@@ -17,7 +17,7 @@ function(
     Util
 ) {
     return declare(WiggleDensity, {
-        constructor: function() {
+        constructor: function () {
             this.store = new GCContent({
                 store: this.store,
                 browser: this.browser,
@@ -26,7 +26,7 @@ function(
                 gcMode: this.config.gcMode
             });
         },
-        _defaultConfig: function() {
+        _defaultConfig: function () {
             return Util.deepUpdate(lang.clone(this.inherited(arguments)), {
                 min_score: 0,
                 max_score: 1,
@@ -38,14 +38,14 @@ function(
                 logScaleOption: false
             });
         },
-        _trackMenuOptions: function() {
+        _trackMenuOptions: function () {
             var track = this;
             var options = this.inherited(arguments);
             options.push({
                 label: 'GC Track Options',
-                onClick: function() {
+                onClick: function () {
                     new WindowSize({
-                        setCallback: function(ws, wd, mode) {
+                        setCallback: function (ws, wd, mode) {
                             track.config.windowSize = ws;
                             track.config.windowDelta = wd;
                             track.config.gcMode = mode;

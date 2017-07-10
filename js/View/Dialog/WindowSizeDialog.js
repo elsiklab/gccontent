@@ -8,7 +8,7 @@ define([
     'dijit/form/Button',
     'JBrowse/View/Dialog/WithActionBar'
 ],
-function(
+function (
     declare,
     dom,
     on,
@@ -21,19 +21,19 @@ function(
     return declare(ActionBarDialog, {
         title: 'Set GC Track options',
 
-        constructor: function(args) {
+        constructor: function (args) {
             this.windowSize      = args.windowSize || 100;
             this.windowDelta     = args.windowDelta || 10;
             this.gcMode          = args.gcMode || 'content';
             this.browser         = args.browser;
-            this.setCallback     = args.setCallback || function() {};
-            this.cancelCallback  = args.cancelCallback || function() {};
+            this.setCallback     = args.setCallback || function () {};
+            this.cancelCallback  = args.cancelCallback || function () {};
         },
 
-        _fillActionBar: function(actionBar) {
+        _fillActionBar: function (actionBar) {
             new Button({
                 label: 'OK',
-                onClick: dojo.hitch(this, function() {
+                onClick: dojo.hitch(this, function () {
                     var windowSize = +this.windowSizeSpinner.getValue();
                     var windowDelta = +this.windowDeltaSpinner.getValue();
                     var gcMode = this.gcModeSelect.getValue();
@@ -47,14 +47,14 @@ function(
 
             new Button({
                 label: 'Cancel',
-                onClick: dojo.hitch(this, function() {
+                onClick: dojo.hitch(this, function () {
                     this.cancelCallback && this.cancelCallback();
                     this.hide();
                 })
             }).placeAt(actionBar);
         },
 
-        show: function(/* callback */) {
+        show: function (/* callback */) {
             dojo.addClass(this.domNode, 'windowSizeDialog');
 
             this.windowSizeSpinner = new NumberSpinner({
@@ -92,7 +92,7 @@ function(
             this.inherited(arguments);
         },
 
-        hide: function() {
+        hide: function () {
             this.inherited(arguments);
             window.setTimeout(dojo.hitch(this, 'destroyRecursive'), 500);
         }

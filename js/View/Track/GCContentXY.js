@@ -7,7 +7,7 @@ define([
     'JBrowse/View/Track/Wiggle/XYPlot',
     'JBrowse/Util'
 ],
-function(
+function (
     declare,
     array,
     lang,
@@ -17,7 +17,7 @@ function(
     Util
 ) {
     return declare(WiggleXY, {
-        constructor: function() {
+        constructor: function () {
             this.store = new GCContent({
                 store: this.store,
                 browser: this.browser,
@@ -26,7 +26,7 @@ function(
                 gcMode: this.config.gcMode
             });
         },
-        _defaultConfig: function() {
+        _defaultConfig: function () {
             return Util.deepUpdate(lang.clone(this.inherited(arguments)), {
                 min_score: 0,
                 max_score: 1,
@@ -39,14 +39,14 @@ function(
                 logScaleOption: false
             });
         },
-        _trackMenuOptions: function() {
+        _trackMenuOptions: function () {
             var track = this;
             var options = this.inherited(arguments);
             options.push({
                 label: 'GC Track Options',
-                onClick: function() {
+                onClick: function () {
                     new WindowSize({
-                        setCallback: function(ws, wd, mode) {
+                        setCallback: function (ws, wd, mode) {
                             track.config.windowSize = ws;
                             track.config.windowDelta = wd;
                             track.config.gcMode = mode;
@@ -69,15 +69,15 @@ function(
         },
 
 
-        fillBlock: function(args) {
+        fillBlock: function (args) {
             var block = args.block;
             var blockIndex = args.blockIndex;
             var scale = args.scale;
             var blur = dojo.create(
 'div',
-{ className: 'sequence_blur',
-  innerHTML: '<span class="loading">Loading</span>'
-}, block.domNode);
+                { className: 'sequence_blur',
+                    innerHTML: '<span class="loading">Loading</span>'
+                }, block.domNode);
 
             this.heightUpdate(blur.offsetHeight + 2 * blur.offsetTop, blockIndex);
 
