@@ -41,17 +41,21 @@ function (
                     var r = f ? residues[i] : residues.slice(i - hw, i + hw);
                     var nc = 0;
                     var ng = 0;
+                    var len = 0;
                     for (var j = 0; j < r.length; j++) {
                         if (r[j] === 'c' || r[j] === 'C') {
                             nc++;
                         } else if (r[j] === 'g' || r[j] === 'G') {
                             ng++;
                         }
+                        if (r[j] != 'N') {
+                            len++;
+                        }
                     }
                     var pos = query.start;
                     var score;
                     if (thisB.gcMode === 'content') {
-                        score = (ng + nc) / r.length;
+                        score = (ng + nc) / len;
                     } else if (thisB.gcMode === 'skew') {
                         score = (ng - nc) / (ng + nc);
                     }
