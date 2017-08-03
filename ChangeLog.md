@@ -1,3 +1,7 @@
+# Version 0.3.0
+
+- Add sequence blur when zoomed too far out on density track (xy track already had this)
+
 # Version 0.2.0
 
 - Fix off-by-one error on windowsize/windowdelta 1. Thanks to @childers for the report
