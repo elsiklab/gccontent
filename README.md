@@ -137,7 +137,7 @@ volvox.fa.gz.gzi
 
 General options:
 
-* storeClass: tested with JBrowse/Store/SeqFeature/IndexedFasta and JBrowse/Store/SeqFeature/SequenceChunks (i.e. output of prepare-refseqs.pl)
+* storeClass: tested with JBrowse/Store/SeqFeature/IndexedFasta, JBrowse/Store/SeqFeature/BgzipIndexedFasta, JBrowse/Store/SeqFeature/TwoBit, JBrowse/Store/SeqFeature/SequenceChunks (i.e. output of prepare-refseqs.pl)
 * windowSize: Size of sliding window (default 100)
 * windowDelta: Step size of the sliding window (default 10)
 * gcMode: The calculation mode, either "skew" for calculation gc skew or "content" for gc content (default: content)
