@@ -57,6 +57,82 @@ Note: if you use SequenceChunks for the store class, then make the regular seque
 
 Otherwise jbrowse tries to use the GCContent track as the store class for getting reference sequences
 
+
+## Example config for twobit
+
+```
+{
+   "formatVersion" : 1,
+   "tracks" : [
+      {
+         "storeClass" : "JBrowse/Store/SeqFeature/TwoBit",
+         "type": "GCContent/View/Track/GCContentXY",
+         "label" : "GCContentXY",
+         "urlTemplate" : "seq/volvox.2bit",
+         "bicolor_pivot": 0.5
+      },
+      {
+         "category" : "Reference sequence",
+         "key" : "Reference sequence",
+         "label" : "DNA",
+         "seqType" : "dna",
+         "storeClass" : "JBrowse/Store/Sequence/TwoBit",
+         "type" : "SequenceTrack",
+         "urlTemplate" : "seq/volvox.2bit",
+         "useAsRefSeqStore" : 1
+      }
+   ]
+}
+```
+
+The twobit was loaded via bin/prepare-refseqs.pl --twobit volvox.2bit
+
+## Example config for bgzip FASTA
+
+For BGZip fasta, available after JBrowse 1.15.4
+
+```
+{
+   "formatVersion" : 1,
+   "refSeqs" : "seq/volvox.fa.gz.fai",
+   "tracks" : [
+      {
+        "storeClass" : "JBrowse/Store/SeqFeature/BgzipIndexedFasta",
+        "type": "GCContent/View/Track/GCContentXY",
+        "label": "GC Content",
+        "urlTemplate" : "seq/volvox.fa.gz"
+      },
+      {
+         "category" : "Reference sequence",
+         "faiUrlTemplate" : "seq/volvox.fa.gz.fai",
+         "gziUrlTemplate" : "seq/volvox.fa.gz.gzi",
+         "key" : "Reference sequence",
+         "label" : "DNA",
+         "seqType" : "dna",
+         "storeClass" : "JBrowse/Store/SeqFeature/BgzipIndexedFasta",
+         "type" : "SequenceTrack",
+         "urlTemplate" : "seq/volvox.fa.gz",
+         "useAsRefSeqStore" : 1
+      }
+   ]
+}
+```
+
+The bgzip fasta was loaded via bin/prepare-refseqs.pl --bgzip_fasta volvox.fa.gz where you have already performed bgzip -i and faidx indexing
+
+```
+bgzip -i volvox.fa
+samtools faidx volvox.fa.gz
+```
+
+Resulting in three files
+
+```
+volvox.fa.gz
+volvox.fa.gz.fai
+volvox.fa.gz.gzi
+```
+
 ## Options
 
 General options:
