@@ -28,7 +28,7 @@ function (
             var hw = this.windowSize === 1 ? 1 : this.windowSize / 2; // Half the window size
             var f = this.windowSize === 1;
             query.start = Math.max(0, query.start - hw) - 1;
-            query.end = Math.min(query.end + hw, this.browser.refSeq.length);
+            query.end = Math.min(query.end + hw, this.browser.refSeq.end);
             var thisB = this;
 
             if (query.end < 0 || query.start > query.end) {
